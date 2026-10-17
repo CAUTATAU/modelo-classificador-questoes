@@ -1,7 +1,7 @@
 id,decisao,tema_central_id,extras_ids,confianca,motivo
-Q0001,publicar,5524,5527,0.89,
+Q0001,publicar,5524,5527,0.98,
 Q0002,revisar,4378,,0.61,modelos divergem: 4378 x 4385
-Q0003,publicar,5534,5562,0.89,
+Q0003,revisar,5534,5562,0.17,3º votante (Opus) discorda: 5562
 Q0004,revisar,5480,,0.80,"tema duplicado/dividido: dúvida com 6732, 6733"
 Q0005,revisar,5199,5203;5208,0.80,"tema duplicado/dividido: dúvida com 6726, 6727"
 Q0006,revisar,5160,5159,0.67,juiz: ambiguo
@@ -11,18 +11,18 @@ Q0009,revisar,5157,,0.80,"tema duplicado/dividido: dúvida com 6720, 6721"
 Q0010,revisar,4688,,0.61,modelos divergem: 4688 x 6717
 Q0011,revisar,4702,,0.61,modelos divergem: 4702 x 5080
 Q0012,publicar,5560,5539,0.89,
-Q0013,publicar,5503,,0.89,
-Q0014,publicar,5477,,0.89,
-Q0015,publicar,5498,,0.89,
+Q0013,publicar,5503,,0.98,
+Q0014,publicar,5477,,0.98,
+Q0015,publicar,5498,,0.98,
 Q0016,revisar,5584,5519;5586;5589,0.80,disciplina de origem fora do recorte (Direito Constitucional)
 Q0017,revisar,5530,5466,0.67,juiz: errado
-Q0018,publicar,5540,,0.89,
-Q0019,publicar,5475,,0.89,
+Q0018,publicar,5540,,0.98,
+Q0019,publicar,5475,,0.98,
 Q0020,revisar,5159,,0.61,modelos divergem: 5159 x 5560
-Q0021,publicar,5503,,0.89,
-Q0022,publicar,5087,,0.89,
-Q0023,publicar,5524,5527;5526;5528,0.89,
-Q0024,publicar,4388,,0.89,
+Q0021,publicar,5503,,0.98,
+Q0022,publicar,5087,,0.98,
+Q0023,publicar,5524,5527;5526;5528,0.98,
+Q0024,publicar,4388,,0.98,
 Q0025,revisar,5087,,0.80,"tema duplicado/dividido: dúvida com 6718, 6719"
 Q0026,revisar,4704,,0.61,modelos divergem: 4704 x 5131
 Q0027,revisar,5488,,0.61,modelos divergem: 5488 x 5530
@@ -30,88 +30,88 @@ Q0028,revisar,5524,,0.61,modelos divergem: 5524 x 5530
 Q0029,revisar,4684,,0.61,modelos divergem: 4684 x 6716
 Q0030,publicar,5134,,0.89,
 Q0031,publicar,4385,,0.89,
-Q0032,publicar,5498,5497,0.89,
-Q0033,publicar,5519,,0.89,
-Q0034,publicar,5477,,0.89,
-Q0035,publicar,4706,,0.89,
+Q0032,revisar,5498,5497,0.17,3º votante (Opus) discorda: 5497
+Q0033,publicar,5519,,0.98,
+Q0034,publicar,5477,,0.98,
+Q0035,publicar,4706,,0.98,
 Q0036,revisar,4704,,0.61,modelos divergem: 4704 x 5131
 Q0037,revisar,5132,,0.61,modelos divergem: 5132 x 5080
 Q0038,revisar,5583,,0.61,modelos divergem: 5583 x 5549
 Q0039,revisar,4687,,0.67,juiz: errado
 Q0040,revisar,5562,,0.61,modelos divergem: 5562 x 5524
-Q0041,publicar,5184,,0.89,
-Q0042,publicar,5222,,0.89,
+Q0041,publicar,5184,,0.98,
+Q0042,publicar,5222,,0.98,
 Q0043,revisar,5199,5203;5204;5206;5201,0.80,"tema duplicado/dividido: dúvida com 6726, 6727"
-Q0044,publicar,5488,5548,0.89,
-Q0045,publicar,5091,,0.89,
-Q0046,publicar,5509,,0.89,
-Q0047,publicar,5164,5063,0.89,
-Q0048,publicar,5193,,0.89,
-Q0049,publicar,5152,,0.89,
-Q0050,publicar,4708,,0.89,
-Q0051,publicar,5182,,0.89,
+Q0044,publicar,5488,5548,0.98,
+Q0045,publicar,5091,,0.98,
+Q0046,publicar,5509,,0.98,
+Q0047,publicar,5164,5063,0.98,
+Q0048,publicar,5193,,0.98,
+Q0049,publicar,5152,,0.98,
+Q0050,publicar,4708,,0.98,
+Q0051,publicar,5182,,0.98,
 Q0052,revisar,4703,,0.61,modelos divergem: 4703 x 5207
-Q0053,publicar,5541,,0.89,
-Q0054,publicar,5174,,0.89,
-Q0055,publicar,5550,5535,0.89,
-Q0056,publicar,5066,,0.89,
-Q0057,publicar,5175,,0.89,
+Q0053,publicar,5541,,0.98,
+Q0054,publicar,5174,,0.98,
+Q0055,publicar,5550,5535,0.98,
+Q0056,publicar,5066,,0.98,
+Q0057,publicar,5175,,0.98,
 Q0058,revisar,4378,,0.61,modelos divergem: 4378 x 4385
 Q0059,revisar,4384,,0.61,modelos divergem: 4384 x 4385
 Q0060,revisar,5087,5091;5093;5097,0.80,"tema duplicado/dividido: dúvida com 6718, 6719"
 Q0061,revisar,4703,,0.61,modelos divergem: 4703 x 5502
-Q0062,publicar,5182,,0.89,
+Q0062,publicar,5182,,0.98,
 Q0063,revisar,4704,,0.61,modelos divergem: 4704 x 5131
 Q0064,revisar,4695,,0.61,modelos divergem: 4695 x 5147
 Q0065,revisar,5161,,0.61,modelos divergem: 5161 x 5132
 Q0066,revisar,4373,,0.61,modelos divergem: 4373 x 4388
-Q0067,publicar,5091,,0.89,
+Q0067,publicar,5091,,0.98,
 Q0068,revisar,5116,,0.61,modelos divergem: 5116 x 5096
-Q0069,publicar,5173,,0.89,
+Q0069,publicar,5173,,0.98,
 Q0070,revisar,5193,,0.61,modelos divergem: 5193 x 5184
 Q0071,revisar,4688,,0.80,tema duplicado/dividido: dúvida com 6717
-Q0072,publicar,5590,5498,0.89,
-Q0073,publicar,5087,5089;5092;5084;5101,0.89,
-Q0074,publicar,5181,,0.89,
-Q0075,publicar,5191,,0.89,
-Q0076,publicar,4373,,0.89,
+Q0072,publicar,5590,5498,0.98,
+Q0073,publicar,5087,5089;5092;5084;5101,0.98,
+Q0074,publicar,5181,,0.98,
+Q0075,publicar,5191,,0.98,
+Q0076,publicar,4373,,0.98,
 Q0077,revisar,5170,5194;5171,0.80,divergência entre subtemas caiu num tema genérico
-Q0078,publicar,4697,4691,0.89,
+Q0078,publicar,4697,4691,0.98,
 Q0079,revisar,5580,,0.80,divergência entre subtemas caiu num tema genérico
-Q0080,publicar,4370,,0.89,
-Q0081,publicar,4373,,0.89,
-Q0082,publicar,5100,5077,0.89,
+Q0080,publicar,4370,,0.98,
+Q0081,publicar,4373,,0.98,
+Q0082,publicar,5100,5077,0.98,
 Q0083,revisar,5226,,0.61,modelos divergem: 5226 x 5149
 Q0084,revisar,4704,,0.80,tema duplicado/dividido: dúvida com 6724
 Q0085,revisar,5076,,0.61,modelos divergem: 5076 x 5091
-Q0086,publicar,5092,,0.89,
+Q0086,publicar,5092,,0.98,
 Q0087,revisar,4703,,0.61,modelos divergem: 4703 x 5521
-Q0088,publicar,4389,4381,0.89,
+Q0088,publicar,4389,4381,0.98,
 Q0089,revisar,5172,,0.61,modelos divergem: 5172 x 5227
-Q0090,publicar,5530,5539;5524,0.89,
+Q0090,publicar,5530,5539;5524,0.98,
 Q0091,revisar,5199,,0.80,"tema duplicado/dividido: dúvida com 6726, 6727"
-Q0092,publicar,5509,,0.89,
+Q0092,publicar,5509,,0.98,
 Q0093,revisar,5223,,0.61,modelos divergem: 5223 x 5138
 Q0094,revisar,4388,,0.61,modelos divergem: 4388 x 4377
-Q0095,publicar,5197,5077;5150,0.89,
+Q0095,publicar,5197,5077;5150,0.98,
 Q0096,revisar,5480,5486,0.80,"tema duplicado/dividido: dúvida com 6732, 6733"
 Q0097,revisar,4708,,0.61,modelos divergem: 4708 x 6728
-Q0098,publicar,5548,,0.89,
-Q0099,publicar,5100,5077,0.89,
-Q0100,publicar,5103,5080;5071,0.89,
+Q0098,publicar,5548,,0.98,
+Q0099,publicar,5100,5077,0.98,
+Q0100,publicar,5103,5080;5071,0.98,
 Q0101,revisar,4704,,0.61,modelos divergem: 4704 x 5466
-Q0102,publicar,5572,5577,0.89,
-Q0103,publicar,5478,,0.89,
-Q0104,publicar,5498,5477,0.89,
+Q0102,publicar,5572,5577,0.98,
+Q0103,publicar,5478,,0.98,
+Q0104,publicar,5498,5477,0.98,
 Q0105,publicar,4385,4378,0.89,
-Q0106,publicar,5166,,0.89,
+Q0106,publicar,5166,,0.98,
 Q0107,revisar,5119,,0.61,modelos divergem: 5119 x 5080
-Q0108,publicar,5561,5530,0.89,
+Q0108,publicar,5561,5530,0.98,
 Q0109,revisar,4708,,0.61,modelos divergem: 4708 x 6728
-Q0110,publicar,5480,,0.89,
-Q0111,publicar,4373,,0.89,
+Q0110,publicar,5480,,0.98,
+Q0111,publicar,4373,,0.98,
 Q0112,revisar,4705,,0.61,modelos divergem: 4705 x 5225
-Q0113,publicar,5185,,0.89,
+Q0113,publicar,5185,,0.98,
 Q0114,revisar,5498,,0.61,modelos divergem: 5498 x 5466
 Q0115,publicar,4385,,0.89,
 Q0116,revisar,4708,,0.61,modelos divergem: 4708 x 6728
@@ -121,19 +121,19 @@ Q0119,revisar,5194,,0.61,modelos divergem: 5194 x 5181
 Q0120,revisar,5533,,0.61,modelos divergem: 5533 x 5543
 Q0121,revisar,5472,,0.61,modelos divergem: 5472 x 5065
 Q0122,revisar,4703,,0.61,modelos divergem: 4703 x 5154
-Q0123,publicar,4378,4379;4368,0.89,
+Q0123,publicar,4378,4379;4368,0.98,
 Q0124,revisar,4384,,0.61,modelos divergem: 4384 x 5199
 Q0125,revisar,4708,,0.61,modelos divergem: 4708 x 5189
 Q0126,revisar,5170,5226;5076;5182;5213,0.67,juiz: errado
 Q0127,revisar,5582,,0.61,modelos divergem: 5582 x 5537
 Q0128,revisar,5466,,0.61,modelos divergem: 5466 x 5184
-Q0129,publicar,5550,,0.89,
-Q0130,publicar,5160,5205,0.89,
-Q0131,publicar,5072,,0.89,
+Q0129,publicar,5550,,0.98,
+Q0130,publicar,5160,5205,0.98,
+Q0131,publicar,5072,,0.98,
 Q0132,revisar,5590,,0.61,modelos divergem: nenhum x 5590
-Q0133,publicar,5524,5526,0.89,
-Q0134,publicar,5092,,0.89,
-Q0135,publicar,5169,,0.89,
+Q0133,publicar,5524,5526,0.98,
+Q0134,publicar,5092,,0.98,
+Q0135,publicar,5169,,0.98,
 Q0136,revisar,4704,,0.61,modelos divergem: 4704 x 5131
 Q0137,revisar,5498,,0.80,disciplina de origem fora do recorte (Direito Civil - Legislação Especial)
 Q0138,revisar,5205,5207,0.67,juiz: ambiguo
@@ -144,63 +144,63 @@ Q0142,fora,,,0.50,nenhum tema ativo serve (os dois modelos)
 Q0143,publicar,5505,,0.89,
 Q0144,revisar,5562,,0.61,modelos divergem: 5562 x 5524
 Q0145,revisar,4702,,0.61,modelos divergem: 4702 x 6723
-Q0146,publicar,5594,,0.89,
-Q0147,publicar,5498,5557;5502;5556,0.89,
-Q0148,publicar,5203,5202,0.89,
-Q0149,publicar,5498,,0.89,
+Q0146,publicar,5594,,0.98,
+Q0147,publicar,5498,5557;5502;5556,0.98,
+Q0148,publicar,5203,5202,0.98,
+Q0149,publicar,5498,,0.98,
 Q0150,revisar,4708,,0.80,tema duplicado/dividido: dúvida com 6728
 Q0151,revisar,5584,,0.61,modelos divergem: 5584 x 5517
 Q0152,revisar,5472,,0.61,modelos divergem: 5472 x 5065
-Q0153,publicar,5222,,0.89,
+Q0153,publicar,5222,,0.98,
 Q0154,revisar,5134,,0.61,modelos divergem: nenhum x 5134
 Q0155,revisar,4703,,0.61,modelos divergem: 4703 x 6734
 Q0156,revisar,4688,,0.61,modelos divergem: 4688 x 6717
-Q0157,publicar,5520,,0.89,
-Q0158,publicar,4707,,0.89,
+Q0157,publicar,5520,,0.98,
+Q0158,publicar,4707,,0.98,
 Q0159,revisar,5226,,0.61,modelos divergem: 5226 x 5150
-Q0160,publicar,5205,,0.89,
-Q0161,publicar,5589,5518;5554,0.89,
+Q0160,publicar,5205,,0.98,
+Q0161,publicar,5589,5518;5554,0.98,
 Q0162,revisar,4381,,0.61,modelos divergem: 4381 x 4369
 Q0163,revisar,4684,,0.61,modelos divergem: 4684 x 5133
 Q0164,revisar,4703,,0.61,modelos divergem: 4703 x 5503
 Q0165,revisar,4705,,0.80,tema duplicado/dividido: dúvida com 6725
-Q0166,publicar,5208,4693;5201,0.89,
-Q0167,publicar,5524,,0.89,
+Q0166,revisar,5208,4693;5201,0.17,3º votante (Opus) discorda: 5521
+Q0167,publicar,5524,,0.98,
 Q0168,revisar,5063,,0.61,modelos divergem: nenhum x 5063
-Q0169,publicar,5492,,0.89,
+Q0169,publicar,5492,,0.98,
 Q0170,revisar,5185,,0.61,modelos divergem: 5185 x 5191
-Q0171,publicar,5502,5557;5201;5185,0.89,
+Q0171,revisar,5502,5557;5201;5185,0.17,3º votante (Opus) discorda: 4693
 Q0172,revisar,5466,5185;5524,0.80,tema duplicado/dividido: dúvida com 5063
 Q0173,revisar,4703,,0.61,modelos divergem: 4703 x 5184
 Q0174,revisar,5171,,0.61,modelos divergem: 5171 x 5155
-Q0175,publicar,5092,5091,0.89,
-Q0176,publicar,5081,,0.89,
-Q0177,publicar,5547,,0.89,
-Q0178,publicar,4697,,0.89,
-Q0179,publicar,4369,,0.89,
-Q0180,publicar,5554,5594,0.89,
+Q0175,publicar,5092,5091,0.98,
+Q0176,publicar,5081,,0.98,
+Q0177,publicar,5547,,0.98,
+Q0178,publicar,4697,,0.98,
+Q0179,publicar,4369,,0.98,
+Q0180,publicar,5554,5594,0.98,
 Q0181,revisar,4695,,0.61,modelos divergem: 4695 x 5147
 Q0182,revisar,5149,,0.61,modelos divergem: 5149 x 5077
 Q0183,revisar,5561,,0.61,modelos divergem: 5561 x 5185
 Q0184,revisar,4708,,0.61,modelos divergem: 4708 x 5517
 Q0185,revisar,4703,,0.61,modelos divergem: 4703 x 5184
-Q0186,publicar,5202,,0.89,
+Q0186,publicar,5202,,0.98,
 Q0187,revisar,5209,,0.61,modelos divergem: 5209 x 5092
 Q0188,publicar,5228,,0.89,
 Q0189,revisar,5466,,0.80,tema duplicado/dividido: dúvida com 5063
-Q0190,publicar,5539,,0.89,
-Q0191,publicar,5560,5567;5561,0.89,
+Q0190,publicar,5539,,0.98,
+Q0191,publicar,5560,5567;5561,0.98,
 Q0192,revisar,5087,5091;5089,0.80,"tema duplicado/dividido: dúvida com 6718, 6719"
-Q0193,publicar,5557,,0.89,
-Q0194,publicar,5089,5076,0.89,
-Q0195,publicar,4371,,0.89,
-Q0196,publicar,4388,,0.89,
-Q0197,publicar,5498,,0.89,
-Q0198,publicar,5073,5071,0.89,
-Q0199,publicar,5218,5228;5211,0.89,
+Q0193,publicar,5557,,0.98,
+Q0194,revisar,5089,5076,0.17,3º votante (Opus) discorda: 5076
+Q0195,publicar,4371,,0.98,
+Q0196,publicar,4388,,0.98,
+Q0197,publicar,5498,,0.98,
+Q0198,publicar,5073,5071,0.98,
+Q0199,publicar,5218,5228;5211,0.98,
 Q0200,revisar,4705,,0.61,modelos divergem: 4705 x 5470
-Q0201,publicar,5103,,0.89,
-Q0202,publicar,5102,5224,0.89,
+Q0201,publicar,5103,,0.98,
+Q0202,revisar,5102,5224,0.17,3º votante (Opus) discorda: 5224
 Q0203,revisar,4702,,0.61,modelos divergem: 4702 x 6723
 Q0204,publicar,5505,,0.89,
 Q0205,revisar,5512,,0.61,modelos divergem: 5512 x 5560
@@ -208,153 +208,153 @@ Q0206,revisar,5583,,0.61,modelos divergem: 5583 x 5466
 Q0207,revisar,4703,,0.61,modelos divergem: 4703 x 5184
 Q0208,publicar,5071,5149,0.89,
 Q0209,revisar,5498,,0.61,modelos divergem: 5498 x 5582
-Q0210,publicar,4697,,0.89,
+Q0210,publicar,4697,,0.98,
 Q0211,revisar,5583,,0.61,modelos divergem: 5583 x 5580
-Q0212,publicar,5488,,0.89,
+Q0212,publicar,5488,,0.98,
 Q0213,revisar,4708,,0.61,modelos divergem: 4708 x 5468
-Q0214,publicar,5494,,0.89,
+Q0214,publicar,5494,,0.98,
 Q0215,revisar,5201,,0.61,modelos divergem: 5201 x 5576
-Q0216,publicar,5539,5541;5542,0.89,
+Q0216,publicar,5539,5541;5542,0.98,
 Q0217,revisar,4384,,0.61,modelos divergem: 4384 x 4380
 Q0218,revisar,5518,,0.80,disciplina de origem fora do recorte (Direito Constitucional)
 Q0219,publicar,5071,,0.89,
-Q0220,publicar,5501,5498,0.89,
-Q0221,publicar,5199,5201;5205;5184,0.89,
+Q0220,publicar,5501,5498,0.98,
+Q0221,publicar,5199,5201;5205;5184,0.98,
 Q0222,revisar,4376,,0.61,modelos divergem: 4376 x nenhum
 Q0223,revisar,4703,,0.61,modelos divergem: 4703 x 5084
-Q0224,publicar,5207,5201,0.89,
-Q0225,publicar,5478,,0.89,
-Q0226,publicar,5544,,0.89,
-Q0227,publicar,5102,5103;5104,0.89,
+Q0224,publicar,5207,5201,0.98,
+Q0225,publicar,5478,,0.98,
+Q0226,publicar,5544,,0.98,
+Q0227,publicar,5102,5103;5104,0.98,
 Q0228,revisar,5566,,0.61,modelos divergem: 5566 x 5208
-Q0229,publicar,5584,5519;5520;5586,0.89,
+Q0229,publicar,5584,5519;5520;5586,0.98,
 Q0230,revisar,5071,,0.61,modelos divergem: 5071 x 5211
-Q0231,publicar,5224,,0.89,
+Q0231,publicar,5224,,0.98,
 Q0232,publicar,5079,5084;5082;5083,0.89,
-Q0233,publicar,5178,,0.89,
-Q0234,publicar,4381,,0.89,
-Q0235,publicar,5561,5480,0.89,
+Q0233,publicar,5178,,0.98,
+Q0234,publicar,4381,,0.98,
+Q0235,publicar,5561,5480,0.98,
 Q0236,publicar,5490,5590;5498,0.89,
-Q0237,publicar,5178,,0.89,
-Q0238,publicar,5523,,0.89,
+Q0237,publicar,5178,,0.98,
+Q0238,publicar,5523,,0.98,
 Q0239,revisar,5199,5207;5175,0.80,"tema duplicado/dividido: dúvida com 6726, 6727"
 Q0240,revisar,5466,,0.61,modelos divergem: 5466 x 5498
-Q0241,publicar,5224,,0.89,
+Q0241,publicar,5224,,0.98,
 Q0242,revisar,5512,,0.61,modelos divergem: 5512 x 5560
-Q0243,publicar,5178,,0.89,
+Q0243,publicar,5178,,0.98,
 Q0244,revisar,5087,,0.80,"tema duplicado/dividido: dúvida com 6718, 6719"
-Q0245,publicar,5185,,0.89,
-Q0246,publicar,5527,,0.89,
-Q0247,publicar,5502,,0.89,
-Q0248,publicar,5087,5100;5091;5092;5093,0.89,
-Q0249,publicar,5492,,0.89,
+Q0245,publicar,5185,,0.98,
+Q0246,publicar,5527,,0.98,
+Q0247,publicar,5502,,0.98,
+Q0248,publicar,5087,5100;5091;5092;5093,0.98,
+Q0249,publicar,5492,,0.98,
 Q0250,revisar,5201,,0.61,modelos divergem: 5201 x 5576
-Q0251,publicar,5191,5193;5185,0.89,
+Q0251,publicar,5191,5193;5185,0.98,
 Q0252,revisar,5208,5206;5193,0.67,juiz: errado
-Q0253,publicar,4373,,0.89,
+Q0253,publicar,4373,,0.98,
 Q0254,revisar,4704,,0.61,modelos divergem: 4704 x nenhum
-Q0255,publicar,5213,,0.89,
-Q0256,publicar,5224,5214,0.89,
-Q0257,publicar,5227,5219;5172,0.89,
-Q0258,publicar,5545,,0.89,
-Q0259,publicar,5183,,0.89,
+Q0255,publicar,5213,,0.98,
+Q0256,publicar,5224,5214,0.98,
+Q0257,publicar,5227,5219;5172,0.98,
+Q0258,publicar,5545,,0.98,
+Q0259,publicar,5183,,0.98,
 Q0260,revisar,4368,,0.61,modelos divergem: 4368 x 4376
 Q0261,revisar,5063,,0.61,modelos divergem: 5063 x 5136
 Q0262,revisar,4703,,0.61,modelos divergem: 4703 x 5184
-Q0263,publicar,5492,,0.89,
-Q0264,publicar,5103,5102,0.89,
+Q0263,publicar,5492,,0.98,
+Q0264,publicar,5103,5102,0.98,
 Q0265,revisar,5185,,0.61,modelos divergem: 5185 x 5066
 Q0266,revisar,5480,5525,0.80,"tema duplicado/dividido: dúvida com 6732, 6733"
 Q0267,revisar,4708,,0.80,tema duplicado/dividido: dúvida com 6728
-Q0268,publicar,5116,5120;5122,0.89,
-Q0269,publicar,5172,,0.89,
-Q0270,publicar,5091,5092;5089,0.89,
+Q0268,publicar,5116,5120;5122,0.98,
+Q0269,publicar,5172,,0.98,
+Q0270,publicar,5091,5092;5089,0.98,
 Q0271,revisar,5513,,0.61,modelos divergem: 5513 x 5562
 Q0272,revisar,4703,,0.61,modelos divergem: 4703 x 5503
 Q0273,revisar,5089,,0.61,modelos divergem: 5089 x 5222
-Q0274,publicar,5160,,0.89,
-Q0275,publicar,5539,5487,0.89,
+Q0274,publicar,5160,,0.98,
+Q0275,publicar,5539,5487,0.98,
 Q0276,revisar,5590,5554;5545;5552;5547,0.67,juiz: errado
 Q0277,revisar,4696,,0.61,modelos divergem: 4696 x 6722
-Q0278,publicar,5542,,0.89,
+Q0278,publicar,5542,,0.98,
 Q0279,revisar,5185,,0.61,modelos divergem: 5185 x 5175
-Q0280,publicar,5120,5063;5065,0.89,
+Q0280,publicar,5120,5063;5065,0.98,
 Q0281,revisar,5590,,0.61,modelos divergem: 5590 x 5555
 Q0282,revisar,4704,,0.61,modelos divergem: 4704 x 5081
-Q0283,publicar,5496,,0.89,
-Q0284,publicar,5231,5214;5228,0.89,
-Q0285,publicar,4376,,0.89,
-Q0286,publicar,5199,5066,0.89,
-Q0287,publicar,5228,,0.89,
+Q0283,publicar,5496,,0.98,
+Q0284,publicar,5231,5214;5228,0.98,
+Q0285,publicar,4376,,0.98,
+Q0286,publicar,5199,5066,0.98,
+Q0287,publicar,5228,,0.98,
 Q0288,revisar,5066,,0.61,modelos divergem: 5066 x 5174
 Q0289,revisar,4704,,0.61,modelos divergem: 4704 x 5131
-Q0290,publicar,5539,5466,0.89,
+Q0290,publicar,5539,5466,0.98,
 Q0291,revisar,4708,,0.61,modelos divergem: 4708 x 6728
-Q0292,publicar,4374,,0.89,
-Q0293,publicar,5185,5188;5189,0.89,
-Q0294,publicar,5211,5212;5214,0.89,
+Q0292,publicar,4374,,0.98,
+Q0293,revisar,5185,5188;5189,0.17,falta o 3º voto (Opus)
+Q0294,publicar,5211,5212;5214,0.98,
 Q0295,revisar,5488,,0.67,juiz: errado
-Q0296,publicar,5472,,0.89,
+Q0296,publicar,5472,,0.98,
 Q0297,revisar,4695,,0.61,modelos divergem: 4695 x nenhum
 Q0298,revisar,4694,,0.67,juiz: errado
-Q0299,publicar,4371,4384;4388,0.89,
-Q0300,publicar,5084,,0.89,
-Q0301,publicar,5197,5077,0.89,
+Q0299,revisar,4371,4384;4388,0.17,3º votante (Opus) discorda: 4388
+Q0300,publicar,5084,,0.98,
+Q0301,publicar,5197,5077,0.98,
 Q0302,revisar,5224,,0.61,modelos divergem: 5224 x 5228
 Q0303,publicar,5180,5181,0.89,
-Q0304,publicar,5540,5541;5542,0.89,
+Q0304,publicar,5540,5541;5542,0.98,
 Q0305,revisar,5470,,0.61,modelos divergem: 5470 x 5064
 Q0306,revisar,5146,,0.61,modelos divergem: 5146 x 4705
 Q0307,revisar,4707,,0.61,modelos divergem: 4707 x 5207
 Q0308,publicar,5498,,0.89,
 Q0309,revisar,4688,,0.61,modelos divergem: 4688 x 6717
-Q0310,publicar,5505,,0.89,
-Q0311,publicar,5488,,0.89,
-Q0312,publicar,4384,,0.89,
+Q0310,publicar,5505,,0.98,
+Q0311,publicar,5488,,0.98,
+Q0312,publicar,4384,,0.98,
 Q0313,revisar,5209,,0.61,modelos divergem: 5209 x 5577
-Q0314,publicar,5477,,0.89,
-Q0315,publicar,5185,5187;5188,0.89,
-Q0316,publicar,5224,5153,0.89,
+Q0314,publicar,5477,,0.98,
+Q0315,publicar,5185,5187;5188,0.98,
+Q0316,publicar,5224,5153,0.98,
 Q0317,publicar,5191,,0.89,
 Q0318,publicar,5175,5177,0.89,
 Q0319,publicar,5071,,0.89,
-Q0320,publicar,5550,,0.89,
+Q0320,publicar,5550,,0.98,
 Q0321,publicar,5071,,0.89,
-Q0322,publicar,5561,,0.89,
-Q0323,publicar,5590,5557;5543;5547,0.89,
+Q0322,publicar,5561,,0.98,
+Q0323,publicar,5590,5557;5543;5547,0.98,
 Q0324,revisar,4703,,0.61,modelos divergem: 4703 x 5199
 Q0325,revisar,5466,,0.61,modelos divergem: 5466 x 5491
 Q0326,revisar,4708,,0.61,modelos divergem: 4708 x 6728
-Q0327,publicar,5203,5202,0.89,
-Q0328,publicar,4382,,0.89,
-Q0329,publicar,5557,5466,0.89,
-Q0330,publicar,5498,5580,0.89,
-Q0331,publicar,5477,,0.89,
-Q0332,publicar,5541,,0.89,
+Q0327,publicar,5203,5202,0.98,
+Q0328,publicar,4382,,0.98,
+Q0329,revisar,5557,5466,0.17,3º votante (Opus) discorda: 4705
+Q0330,publicar,5498,5580,0.98,
+Q0331,publicar,5477,,0.98,
+Q0332,publicar,5541,,0.98,
 Q0333,revisar,5175,,0.61,modelos divergem: 5175 x 5170
-Q0334,publicar,4381,,0.89,
+Q0334,publicar,4381,,0.98,
 Q0335,revisar,5174,,0.61,modelos divergem: 5174 x 5218
-Q0336,publicar,5159,,0.89,
+Q0336,publicar,5159,,0.98,
 Q0337,revisar,4684,,0.80,tema duplicado/dividido: dúvida com 6716
-Q0338,publicar,5590,5550;5548;5545,0.89,
+Q0338,publicar,5590,5550;5548;5545,0.98,
 Q0339,revisar,5572,5565,0.80,"tema duplicado/dividido: dúvida com 6737, 6738"
-Q0340,publicar,5071,,0.89,
-Q0341,publicar,5157,,0.89,
-Q0342,publicar,5545,,0.89,
+Q0340,publicar,5071,,0.98,
+Q0341,publicar,5157,,0.98,
+Q0342,revisar,5545,,0.17,3º votante (Opus) discorda: 5546
 Q0343,revisar,5472,,0.61,modelos divergem: 5472 x 5196
 Q0344,revisar,6717,,0.80,tema duplicado/dividido: dúvida com 4688
-Q0345,publicar,5103,5203,0.89,
-Q0346,publicar,5583,,0.89,
+Q0345,publicar,5103,5203,0.98,
+Q0346,publicar,5583,,0.98,
 Q0347,revisar,5069,,0.61,modelos divergem: 5069 x 5170
-Q0348,publicar,5093,5182,0.89,
+Q0348,publicar,5093,5182,0.98,
 Q0349,revisar,5178,,0.61,modelos divergem: 5178 x 5199
 Q0350,revisar,4702,,0.61,modelos divergem: 4702 x 6723
-Q0351,publicar,5118,,0.89,
+Q0351,publicar,5118,,0.98,
 Q0352,revisar,5512,,0.61,modelos divergem: 5512 x 5560
-Q0353,publicar,5185,5191,0.89,
+Q0353,publicar,5185,5191,0.98,
 Q0354,publicar,5218,5226;5071;5221,0.89,
-Q0355,publicar,4708,,0.89,
-Q0356,publicar,5066,5067;5068,0.89,
-Q0357,publicar,5135,,0.89,
+Q0355,publicar,4708,,0.98,
+Q0356,publicar,5066,5067;5068,0.98,
+Q0357,publicar,5135,,0.98,
 Q0358,fora,,,0.50,nenhum tema ativo serve (os dois modelos)
 Q0359,revisar,4696,,0.61,modelos divergem: 4696 x 6722

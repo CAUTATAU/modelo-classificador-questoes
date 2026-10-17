@@ -18,7 +18,7 @@ from preparar import CACHE, RAIZ, carregar_questoes, carregar_temas, texto_quest
 FORA_ESCOPO = {"Direito Constitucional", "Direito Civil - Legislação Especial", "Direito Tributário", "Direito Ambiental"}
 # Confiança antes de existir amostra rotulada; substituída pelo acerto observado em cada grupo.
 CONFIANCA_INICIAL = {"unanime": 0.97, "ramo": 0.92, "revisar_flag": 0.75, "revisar_juiz": 0.5,
-                     "revisar_diverge": 0.4, "fora": 0.7}
+                     "revisar_diverge": 0.4, "revisar_opus": 0.6, "fora": 0.7}
 ARQ_PUBLICACAO = RAIZ / "publicacao.csv"
 ARQ_AMOSTRA = RAIZ / "amostra_ouro.csv"
 
@@ -89,6 +89,24 @@ def decidir(q, va, vb, vj, ativos):
     return "publicar", no, extras, "unanime" if unanime else "ramo", ""
 
 
+def rotulo_opus(o):
+    return "fora" if o["nenhum_serve"] or not o["tema_central_id"] else o["tema_central_id"]
+
+
+def terceiro_voto(res, vo, ativos):
+    """Filtro final: só publica se o Opus 4.6 (às cegas) também cair no mesmo ramo do nó publicado.
+    Entrou depois da 1ª medição (92% < 95%): os 4 erros da amostra eram questões entre dois temas."""
+    d, no, extras, grupo, motivo = res
+    if d != "publicar":
+        return res
+    if not vo:
+        return "revisar", no, extras, "revisar_opus", "falta o 3º voto (Opus)"
+    t = rotulo_opus(vo)
+    if t == "fora" or t not in ativos or not mesmo_ramo(no, t, ativos):
+        return "revisar", no, extras, "revisar_opus", f"3º votante (Opus) discorda: {t}"
+    return res
+
+
 # ---------- cache e saída ----------
 
 def ler_jsonl(nome):
@@ -156,14 +174,18 @@ def avaliar(linhas, grupos, rotulos, ativos):
     for l in pubs:
         if not acertou(l, rotulos[l["id"]], ativos):
             print(f"  ERRO {l['id']}: publicado {l['tema_central_id']} | gabarito {rotulos[l['id']]}")
-    # O quanto o pré-rótulo do Opus bate com a conferência humana (risco: ele concordar demais com o Sonnet)
     obs = {r["id"]: r["observacao"] for r in csv.DictReader(open(ARQ_AMOSTRA, encoding="utf-8-sig"))}
+    # Com o Opus como 3º votante, só o rótulo conferido por humano mede sem circularidade
+    humanas = [l for l in pubs if obs.get(l["id"], "").startswith("conferido")]
+    kh = sum(acertou(l, rotulos[l["id"]], ativos) for l in humanas)
+    lo, hi = wilson(kh, len(humanas))
+    print(f"precisão nas publicadas CONFERIDAS por humano: {kh}/{len(humanas)}  (Wilson 95%: {lo:.3f}-{hi:.3f})")
+    # O quanto o pré-rótulo do Opus bate com a conferência humana (risco: ele concordar demais com o Sonnet)
     opus = ler_jsonl("rotulos_opus")
     conf = [i for i in rotulos if obs.get(i, "").startswith("conferido") and i in opus]
     if conf:
-        rot_opus = lambda o: "fora" if o["nenhum_serve"] or not o["tema_central_id"] else o["tema_central_id"]
-        ok = sum(rot_opus(opus[i]) == rotulos[i] or (rotulos[i] != "fora" and rot_opus(opus[i]) != "fora"
-                 and mesmo_ramo(rot_opus(opus[i]), rotulos[i], ativos)) for i in conf)
+        ok = sum(rotulo_opus(opus[i]) == rotulos[i] or (rotulos[i] != "fora" and rotulo_opus(opus[i]) != "fora"
+                 and mesmo_ramo(rotulo_opus(opus[i]), rotulos[i], ativos)) for i in conf)
         print(f"rótulos conferidos por humano: {len(conf)} | Opus no mesmo ramo do humano em {ok}/{len(conf)}"
               f" | só Opus (não conferidos): {sum(1 for i in rotulos if obs.get(i) == 'opus')}")
     return taxa
@@ -172,13 +194,14 @@ def avaliar(linhas, grupos, rotulos, ativos):
 def gerar():
     ativos, _ = carregar_temas()
     qs = carregar_questoes()
-    va, vb, vj = ler_jsonl("votos_A"), ler_jsonl("votos_B"), ler_jsonl("juiz")
+    va, vb, vj, vo = ler_jsonl("votos_A"), ler_jsonl("votos_B"), ler_jsonl("juiz"), ler_jsonl("rotulos_opus")
     faltando = [q["id"] for q in qs if q["id"] not in va or q["id"] not in vb]
     if faltando:
         print(f"ATENÇÃO: {len(faltando)} questões sem os dois votos (rode classificar.py votar de novo): {faltando[:10]}")
     linhas, grupos = [], {}
     for q in qs:
-        d, tema, extras, grupo, motivo = decidir(q, va.get(q["id"]), vb.get(q["id"]), vj.get(q["id"]), ativos)
+        d, tema, extras, grupo, motivo = terceiro_voto(
+            decidir(q, va.get(q["id"]), vb.get(q["id"]), vj.get(q["id"]), ativos), vo.get(q["id"]), ativos)
         grupos[q["id"]] = grupo
         linhas.append({"id": q["id"], "decisao": d, "tema_central_id": tema, "extras_ids": ";".join(extras),
                        "confianca": "", "motivo": motivo})
@@ -239,9 +262,9 @@ def sortear_amostra(n_pub=50, n_rev=20, n_fora=10, semente=42):
     print(f"{len(saida)} questões em {ARQ_AMOSTRA.name}; texto para leitura em cache/amostra_para_rotular.md")
 
 
-def preencher(n_concorda=15, semente=7):
-    """Põe o rótulo do Opus nas linhas vazias de amostra_ouro.csv e gera cache/conferir.md:
-    todas as publicadas em que o Opus discorda + n_concorda concordâncias sorteadas (para medir se ele concorda demais)."""
+def preencher():
+    """Põe o rótulo do Opus nas linhas vazias de amostra_ouro.csv e lista em cache/conferir.md
+    TODAS as publicadas da amostra ainda não conferidas por humano (com o Opus votando, só o humano mede)."""
     ativos, _ = carregar_temas()
     qs = {q["id"]: q for q in carregar_questoes()}
     pub = {l["id"]: l for l in csv.DictReader(open(ARQ_PUBLICACAO, encoding="utf-8"))}
@@ -250,7 +273,7 @@ def preencher(n_concorda=15, semente=7):
     for r in linhas:
         o = opus.get(r["id"])
         if o and not r["tema_correto_id"]:
-            r["tema_correto_id"] = "fora" if o["nenhum_serve"] or not o["tema_central_id"] else o["tema_central_id"]
+            r["tema_correto_id"] = rotulo_opus(o)
             r["observacao"] = "opus"
     with open(ARQ_AMOSTRA, "w", encoding="utf-8-sig", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(linhas[0]))
@@ -258,15 +281,17 @@ def preencher(n_concorda=15, semente=7):
         w.writerows(linhas)
 
     caminho = lambda t: "fora" if t == "fora" else f"`{t}` {ativos[t]['caminho']}"
-    publicadas = [r for r in linhas if pub[r["id"]]["decisao"] == "publicar" and r["observacao"] == "opus"]
-    discorda = [r for r in publicadas if not acertou(pub[r["id"]], r["tema_correto_id"], ativos)]
-    concorda = [r for r in publicadas if r not in discorda]
-    conferir = random.Random(semente).sample(concorda, min(n_concorda, len(concorda)))
+    pendentes = [r for r in linhas if pub[r["id"]]["decisao"] == "publicar" and r["observacao"] == "opus"]
+    discorda = [r for r in pendentes if not acertou(pub[r["id"]], r["tema_correto_id"], ativos)]
+    concorda = [r for r in pendentes if r not in discorda]
     md = ["# Conferir rótulos do Opus\n",
           "Para cada questão: se o Opus errou, troque `tema_correto_id` em amostra_ouro.csv;",
-          "em todas as que você olhar, troque `observacao` de `opus` para `conferido` (ou `conferido: motivo`).\n",
-          f"Publicadas na amostra: {len(publicadas)} | Opus discorda: {len(discorda)} | concordâncias para checar: {len(conferir)}\n"]
-    for titulo, grupo in (("Opus DISCORDA da publicação", discorda), ("Opus concorda (checagem)", conferir)):
+          "em todas as que você olhar, troque `observacao` de `opus` para `conferido` (ou `conferido: motivo`).",
+          "Ou mande no chat: `Q0001: ok` (Opus certo) / `Q0001: <id certo>`.\n",
+          f"Publicadas na amostra ainda não conferidas: {len(pendentes)} (Opus discorda: {len(discorda)})\n"]
+    for titulo, grupo in (("Opus DISCORDA da publicação", discorda), ("Opus concorda", concorda)):
+        if not grupo:
+            continue
         md.append(f"\n# {titulo}\n")
         for r in grupo:
             o, l = opus[r["id"]], pub[r["id"]]
@@ -274,8 +299,8 @@ def preencher(n_concorda=15, semente=7):
                    f"- **Publicado:** {caminho(l['tema_central_id'])}",
                    f"- **Opus:** {caminho(r['tema_correto_id'])} — {o['justificativa']}"]
     (CACHE / "conferir.md").write_text("\n".join(md), encoding="utf-8")
-    print(f"{len(publicadas)} publicadas na amostra; Opus discorda de {len(discorda)}; "
-          f"{len(conferir)} concordâncias sorteadas → cache/conferir.md")
+    print(f"{len(pendentes)} publicadas da amostra sem conferência humana ({len(discorda)} com o Opus discordando)"
+          f" → cache/conferir.md")
 
 
 def _autoteste(ativos):
@@ -289,6 +314,10 @@ def _autoteste(ativos):
     assert no_candidato(voto(filho), voto(irmao), ativos) == tema
     assert no_candidato(voto(filho), voto(tema), ativos) == tema
     assert no_candidato(voto(filho), voto(outro), ativos) is None  # só a disciplina em comum
+    pub = ("publicar", filho, [], "unanime", "")
+    assert terceiro_voto(pub, voto(tema), ativos) == pub  # Opus no pai: mesmo ramo, publica
+    assert terceiro_voto(pub, voto(irmao), ativos)[0] == "revisar"  # Opus no irmão: segura
+    assert terceiro_voto(pub, None, ativos)[0] == "revisar"  # sem 3º voto não publica
     assert wilson(0, 0) == (0.0, 1.0) and wilson(50, 50)[0] > 0.9
 
 

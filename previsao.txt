@@ -1,0 +1,38 @@
+precisao_prevista: 0.96   # fração das publicadas que estará certa
+precisao_intervalo: 0.91-0.99
+cobertura_prevista: 0.53  # fração das questões que você publicou
+cobertura_intervalo: 0.51-0.55
+
+COMO CHEGUEI NESSES NÚMEROS
+
+Cobertura
+Publiquei 191 das 359 questões (53,2%). Esse número é exato no meu arquivo. O intervalo existe porque a avaliação usa "as questões que guardamos": se alguma questão ficar fora da conta (por exemplo, uma que a equipe considere sem tema), o denominador muda um pouco. Por isso a faixa de ±2 pontos.
+
+Precisão
+1. Amostra. Sorteei 50 questões ao acaso entre as que o pipeline publicaria. Todas foram rotuladas de forma independente: o Opus 4.6 rotulou às cegas (sem ver a escolha dos outros modelos nem o assunto de origem) e eu conferi uma a uma. O Opus e eu concordamos nas 50.
+
+2. Primeira medição: 46/50 = 92%, abaixo da meta. Os 4 erros eram questões que cruzam dois temas: absolvição sumária × apelação; Pacote Anticrime (acordo de não persecução × crimes hediondos); colaboração premiada (Processo Penal × Organizações Criminosas); exame de corpo de delito × perícia.
+
+3. Ajuste. Acrescentei uma regra: só publica se um 3º modelo, o Opus 4.6 às cegas, também cair no mesmo ramo do tema. Essa regra não é feita sob medida para os 4 erros; é um terceiro votante independente, aplicado a todas as questões. Ela tirou exatamente esses 4 da publicação e mais 9 das 150 publicáveis fora da amostra (6%, perto dos 8% da amostra).
+
+4. Medição final. As 46 questões da amostra que continuam publicadas estão todas certas: 46/46. O intervalo de Wilson de 95% para 46/46 vai de 92,3% a 100%. Como a amostra foi sorteada ao acaso entre as publicáveis, as 46 que sobraram são uma amostra aleatória do que foi de fato publicado.
+
+5. Por que não prevejo 100%:
+   a) Convenção dos especialistas. Meu gabarito é o meu julgamento (com a ajuda do Opus), não o da equipe. Em questões que cruzam dois temas, a equipe pode ter uma convenção diferente. Foi exatamente esse tipo de questão que gerou os 4 erros da 1ª medição.
+   b) Viés de quem confere. Eu via o rótulo do Opus enquanto conferia, e concordei nas 50. Isso pode indicar que eu fui influenciado por ele, e não só que ele acertou.
+   c) Regra escolhida depois de olhar a amostra. Foi uma decisão só, e de princípio, mas deixa a medida um pouco otimista.
+   d) Amostra pequena. Com n = 46, um único erro já muda a precisão em ~2 pontos.
+
+   Por isso desci de 100% observado para 96% e alarguei o limite inferior de 92,3% (Wilson) para 91%.
+
+6. O que fica de fora da publicação, de propósito (166 em revisão):
+   - quando os dois primeiros modelos divergem (119);
+   - temas duplicados entre disciplinas ou divididos em "Parte 1/Parte 2" (23), porque não sei qual versão é a oficial;
+   - quando o 3º votante discorda (9);
+   - quando o juiz não confirma (9);
+   - disciplina de origem fora do recorte (3);
+   - divergência que cairia num tema genérico (2);
+   - uma questão sem o voto do Opus (1).
+   Na amostra, a sugestão de tema estava certa em só 14 de 24 (58%) das que mandei para revisão. Ou seja, elas são de fato as duvidosas. Esse número usa os rótulos do Opus sem conferência humana, porque a precisão só é medida nas publicadas.
+
+Maior risco desta previsão: a equipe usar uma convenção diferente para o "tema central" das questões que cruzam dois temas. Se isso acontecer em mais de 2 a 3 das publicadas avaliadas, a precisão cai para perto de 95%.

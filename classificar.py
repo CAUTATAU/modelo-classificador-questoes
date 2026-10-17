@@ -1,10 +1,10 @@
 """Etapas 2, 3 e pré-rótulo: votos de dois modelos, juiz e rotulador da amostra-ouro, via Amazon Bedrock (boto3).
 
-Uso (perfil AWS: variável AWS_PROFILE, padrão "pessoal"):
+Uso (perfil AWS: o default do AWS CLI; para outro, defina AWS_PROFILE):
   python classificar.py teste      # passo 0: uma chamada mínima por modelo
   python classificar.py votar [N]  # votante A (Sonnet 4.6) e B (Haiku 4.5) nas N primeiras questões (padrão: todas)
   python classificar.py juiz       # juiz (Sonnet 4.6) nas questões com nó publicável
-  python classificar.py rotular    # Opus 4.6 rotula às cegas as questões de amostra_ouro.csv
+  python classificar.py rotular    # Opus 4.6 às cegas: pré-rótulo da amostra-ouro + 3º votante nas publicáveis
 As respostas ficam em cache/*.jsonl: rodar de novo só chama o que falta.
 """
 import csv
@@ -18,7 +18,7 @@ import boto3
 from botocore.config import Config
 from botocore.exceptions import BotoCoreError, ClientError
 
-from decidir import ARQ_AMOSTRA, ler_jsonl, no_candidato, pai
+from decidir import ARQ_AMOSTRA, decidir, ler_jsonl, no_candidato, pai
 from preparar import CACHE, RAIZ, DESCRICAO_AUTOMATICA, carregar_questoes, carregar_temas, texto_arvore, texto_questao
 
 # A conta pessoal só libera até Sonnet 4.6 / Haiku 4.5 / Opus 4.6 (família 5.x: "not available for this account").
@@ -27,7 +27,7 @@ HAIKU = "us.anthropic.claude-haiku-4-5-20251001-v1:0"
 OPUS = "us.anthropic.claude-opus-4-6-v1"
 PARALELO = 4
 
-bedrock = boto3.Session(profile_name=os.environ.get("AWS_PROFILE", "pessoal")).client(
+bedrock = boto3.Session(profile_name=os.environ.get("AWS_PROFILE")).client(  # None → perfil default do AWS CLI
     "bedrock-runtime", region_name="us-east-1",
     # adaptive: o botocore espaça as chamadas sozinho quando a conta bate no limite (ThrottlingException)
     config=Config(retries={"max_attempts": 8, "mode": "adaptive"}, read_timeout=300),
@@ -143,10 +143,14 @@ def votar(n=None):
 
 
 def rotular():
-    """Pré-rótulo da amostra-ouro: modelo mais forte, effort alto, sem pista e sem ver os votos."""
+    """Opus 4.6 (effort alto, sem pista, sem ver os votos) na amostra-ouro e nas publicáveis pelas regras de 2 votos.
+    O mesmo procedimento serve de pré-rótulo da amostra e de 3º votante: só publica se ele cair no mesmo ramo."""
+    ativos, _ = carregar_temas()
     ids = {r["id"] for r in csv.DictReader(open(ARQ_AMOSTRA, encoding="utf-8-sig"))}
-    classificar_com("rotulos_opus", OPUS, [q for q in carregar_questoes() if q["id"] in ids], "high",
-                    max_tokens=8000)
+    va, vb, vj = ler_jsonl("votos_A"), ler_jsonl("votos_B"), ler_jsonl("juiz")
+    qs = [q for q in carregar_questoes() if q["id"] in ids
+          or decidir(q, va.get(q["id"]), vb.get(q["id"]), vj.get(q["id"]), ativos)[0] == "publicar"]
+    classificar_com("rotulos_opus", OPUS, qs, "high", max_tokens=8000)
 
 
 def _linha(t, ativos):

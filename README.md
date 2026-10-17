@@ -2,6 +2,11 @@
 
 Classifica 359 questões de Penal, Processo Penal, Legislação Penal Especial e Criminologia na árvore de temas da plataforma. Cada questão recebe uma decisão: `publicar`, `revisar` ou `fora`. A meta é ≥95% de acerto nas publicadas.
 
+**Documentos:**
+- [`docs/arquitetura.md`](docs/arquitetura.md): arquitetura completa, estratégia, medição de qualidade, custos e o plano de produção com ML.
+- [`relatorio.md`](relatorio.md): o relatório do case.
+- [`memo_professor.md`](memo_professor.md): o memo para o professor.
+
 ## Como rodar
 
 Pré-requisitos:
@@ -13,16 +18,17 @@ Pré-requisitos:
 python -m venv .venv
 .venv\Scripts\pip install -r requirements.txt
 # coloque questoes.jsonl, temas.csv e LEIA-ME.md (anexos do case) em dados/ — não versionados
-$env:AWS_PROFILE = "pessoal"   # perfil AWS local; nenhuma credencial fica no código
+# usa o perfil default do AWS CLI; para outro: $env:AWS_PROFILE = "nome". Nenhuma credencial fica no código
 
 .venv\Scripts\python preparar.py            # limpa textos, monta a árvore, marca temas de risco
 .venv\Scripts\python classificar.py teste   # confere acesso aos modelos
 .venv\Scripts\python classificar.py votar   # votante A (Sonnet 4.6) e B (Haiku 4.5); rode 2x para refazer falhas
 .venv\Scripts\python classificar.py juiz    # juiz (Sonnet 4.6) só nas candidatas a publicar
 .venv\Scripts\python decidir.py amostra     # sorteia a amostra-ouro (72 questões, estratificada)
-.venv\Scripts\python classificar.py rotular # Opus 4.6 pré-rotula a amostra às cegas (sem pista, sem ver os votos)
-.venv\Scripts\python decidir.py preencher   # põe os rótulos do Opus na amostra e gera cache/conferir.md
-#   → um humano confere todas as publicadas em que o Opus discorda + 15 concordâncias sorteadas
+.venv\Scripts\python classificar.py rotular # Opus 4.6 às cegas (sem pista, sem ver os votos): pré-rótulo da amostra
+                                            # e 3º votante nas publicáveis; rode 2x para refazer falhas
+.venv\Scripts\python decidir.py preencher   # põe os rótulos do Opus na amostra e lista em cache/conferir.md
+#   → um humano confere as publicadas da amostra que ainda não foram conferidas
 .venv\Scripts\python decidir.py             # regras → publicacao.csv; mede a precisão na amostra rotulada
 ```
 
@@ -52,7 +58,10 @@ Todas as respostas dos modelos ficam em `cache/*.jsonl`. Rodar de novo só chama
 | Divergência entre subtemas que sobe para um tema genérico | `revisar` |
 | Tema duplicado ou dividido em "(Parte N)", sem unanimidade, ou com o tema gêmeo como 2ª opção | `revisar` |
 | `disciplina_origem` fora do recorte (Constitucional, Civil, Tributário, Ambiental) | `revisar` |
+| O 3º votante (Opus 4.6, às cegas) não cai no mesmo ramo do nó | `revisar` |
 | Resto | `publicar` no ancestral comum mais baixo dos dois votos |
+
+A regra do 3º votante **não** estava nas regras iniciais. Ela entrou depois da 1ª medição: 46/50 = 92% na amostra, abaixo da meta. Os 4 erros eram questões entre dois temas, e o Opus discordou em todos. Por isso, a precisão final é medida **só com rótulos conferidos por humano**: usar o Opus como votante e como gabarito ao mesmo tempo seria circular.
 
 O ancestral comum é o mesmo nó quando há unanimidade. Quando os modelos divergem entre subtemas irmãos, é o tema pai, o que vale como acerto pela régua do case. **Nunca publicamos na disciplina raiz.**
 
@@ -63,19 +72,22 @@ O ancestral comum é o mesmo nó quando há unanimidade. Quando os modelos diver
 | Votante A | `us.anthropic.claude-sonnet-4-6` | thinking adaptativo, effort `low` |
 | Votante B | `us.anthropic.claude-haiku-4-5-20251001-v1:0` | sem thinking |
 | Juiz | `us.anthropic.claude-sonnet-4-6` | effort `medium` |
+| 3º votante + pré-rótulo da amostra | `us.anthropic.claude-opus-4-6-v1` | thinking adaptativo, effort `high`, sem pista |
 
 - **Por que esses modelos:** o plano era Sonnet 5.5 + Haiku 5.5, mas a conta usada não tem acesso aos modelos 5.x ("not available for this account"). Ficaram os mais novos liberados.
 - **Custo:** a árvore (~12,8 mil tokens) vai em cache, e cada leitura em cache custa ~10% do preço normal. Rodada completa medida pelos tokens, a preço de lista:
 
   | Etapa | Custo |
   |---|---|
-  | Votante A | ~US$ 2,70 |
-  | Votante B | ~US$ 1,00 |
-  | Juiz (238 questões) | ~US$ 1,60 |
-  | **Total (~US$ 0,015 por questão)** | **~US$ 5,30** |
+  | Votante A (359) | ~US$ 3,00 |
+  | Votante B (359) | ~US$ 1,10 |
+  | Juiz (238) | ~US$ 1,70 |
+  | Opus: amostra (72) + 3º votante (150) | ~US$ 8,00 |
+  | 1ª versão, testes e falhas | ~US$ 1,40 |
+  | **Total (~US$ 0,036 por questão no pipeline final)** | **~US$ 15,30** |
 
-  Com os testes, o case inteiro ficou em ~US$ 6. O preço no Bedrock pode diferir um pouco do de lista.
-- **Tempo:** ~40 min para as 359 questões (4 chamadas em paralelo; o limite de requisições da conta é o gargalo).
+  O preço no Bedrock pode diferir um pouco do de lista.
+- **Tempo:** ~2 h de processamento. São ~40 min para os votos e o juiz e ~1 h para o Opus, por causa do limite de requisições da conta.
 
 ## Decisões tomadas à mão
 
