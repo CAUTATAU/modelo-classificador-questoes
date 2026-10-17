@@ -1,0 +1,7 @@
+# dados reais da empresa: não publicar
+dados/
+# respostas brutas dos modelos (regeráveis)
+cache/
+.venv/
+__pycache__/
+.env

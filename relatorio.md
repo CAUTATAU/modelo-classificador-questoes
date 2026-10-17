@@ -1,0 +1,90 @@
+# Relatório — Classificação de tópicos
+
+> Números de resultado (cobertura, precisão medida) estão em `previsao.txt` e são gerados por `decidir.py`.
+
+## a) Como pensei
+
+**O problema real não é classificar, é saber quando não publicar.** Um LLM acerta o tema "razoavelmente bem". A régua, porém, é ≥95% nas publicadas, e o erro mais caro é o aluno estudar a matéria errada. Por isso desenhei o sistema em torno de uma pergunta: *em quais questões eu tenho evidência independente de que o tema está certo?* O resto vai para o professor.
+
+**Hipóteses, em ordem:**
+
+1. **Treinar um classificador (ML clássico).** Descartado. Não há nenhuma questão rotulada, e são 377 temas para 359 questões: mesmo rotulando tudo à mão, ficaria menos de um exemplo por tema. O ML entra em produção, quando a fila do professor gerar rótulos limpos (seção c).
+2. **Embeddings para filtrar 10–15 temas candidatos antes do LLM.** Descartado sem testar, por custo-benefício. A árvore inteira (375 temas, ~12,8 mil tokens) cabe no prompt e, com *prompt caching*, cada leitura custa ~10% do preço. O filtro só acrescentaria um jeito novo de errar: o tema certo ficar fora da lista quando a questão usa vocabulário diferente do título.
+3. **Um LLM só, com "confiança" auto-declarada.** Descartado. A confiança que o modelo declara sobre si mesmo é mal calibrada. A troquei por três sinais que eu consigo medir:
+   - concordância entre **dois modelos diferentes** (Sonnet 4.6 e Haiku 4.5), que erram de formas diferentes;
+   - um **juiz** com outro prompt, que vê só o tema proposto, os subtemas e os irmãos dele;
+   - uma **amostra rotulada à mão**, para medir o acerto de verdade.
+4. **Entradas diferentes para os votantes.** Só o votante A vê o `assunto_origem` (com o aviso de que pode estar errado). Se os dois vissem a mesma pista errada, poderiam concordar no erro, e é exatamente essa concordância que libera a publicação.
+5. **Usar a régua a favor do aluno, sem trapaça.** Publicar no tema pai conta como certo. Quando os modelos divergem entre subtemas irmãos, publico no tema de nível 1. Nunca publico na disciplina raiz: tecnicamente "contaria", mas é o comportamento que criou as lixeiras.
+
+**Becos sem saída:**
+- **Modelos indisponíveis.** O plano era Claude Sonnet 5.5 + Haiku 5.5, mas a conta AWS usada responde "not available for this account" para toda a família 5.x. Fiquei com os mais novos liberados.
+- **Ids inventados.** Na 1ª rodada, o Haiku inventou ids vizinhos dos reais (5688 no lugar de 4688), em 3 de 30 questões. Corrigi forçando, no esquema de saída, um `enum` com os ids existentes.
+- **Respostas em laço.** Raramente, um modelo entra em laço e repete texto até estourar o limite. Pus um teto de tokens baixo e uma segunda rodada só para as falhas.
+- **Cobertura baixa nas 30 primeiras.** Só 13 de 30 passaram por todos os filtros. A maior parte das divergências vem do Haiku escolhendo temas genéricos ("Procedimento Ordinário") ou o tema duplicado da outra disciplina. Mantive a regra: divergência vai para revisão. O custo é cobertura, não precisão.
+
+## b) Diagnóstico: o que atrapalha máquina e humano
+
+1. **Temas duplicados entre disciplinas.** Lei Maria da Penha, Abuso de Autoridade, Tráfico de Drogas, Lavagem de Dinheiro, Organizações Criminosas e Crimes Ambientais existem em *Penal* (sem descrição) e em *Legislação Especial*. Ação Penal está em *Penal* e em *Processo Penal*, e LEP em *Legislação Especial* e *Processo Penal*. Para a régua, escolher o lado errado é erro, e não há critério escrito para escolher. Os modelos se dividem exatamente aí.
+2. **Temas partidos em "(Parte 1)/(Parte 2)".** Teoria da Pena, Competência, Sentença Penal, Crimes contra o Patrimônio e Crimes contra a Administração Pública existem como tema completo, com subtemas, *e* como "Parte 1/Parte 2" irmãs, sem descrição e sem dizer o que vai em cada parte. Nem um humano consegue escolher sem uma convenção.
+3. **Lixeiras.** Temas introdutórios acumularam centenas de questões no sistema de origem:
+   - Sistemas e Princípios Processuais Penais (538)
+   - Teoria da Pena (453)
+   - Introdução ao Estudo do Direito Penal (424)
+   - Conceito e Fontes (310)
+
+   Como "falam de tudo", atraem qualquer questão. Tratei títulos genéricos como sinal de risco.
+4. **Descrições que não descrevem.** 337 dos 377 temas têm uma descrição gerada automaticamente ("Subtema de X. N questões no source"), e 20 não têm nenhuma. Só 20 explicam o que entra no tema.
+5. **Dados de origem pouco confiáveis.** Só 143 das 359 questões têm um `assunto_origem` igual a algum tema, e 18 vêm vazias. Algumas vêm marcadas como Constitucional, Civil ou Tributário.
+6. **Texto sujo.** HTML cru, `\n` literal dentro das alternativas e erros de digitação nos temas ("Crimonológicas", "Legitimidoras", "Caractéristas").
+7. **Questões difíceis por natureza:**
+   - **Múltiplas assertivas (I, II, III, IV)** sobre assuntos diferentes: não existe *um* tema central;
+   - **Questões que cruzam Penal e Processo Penal** (ex.: absolvição sumária e recurso cabível);
+   - **Questões de Criminologia ancoradas num autor** ("segundo Vera Andrade..."), que cabem em mais de uma corrente.
+
+## c) Produção: 50 mil questões por semana
+
+**Não reclassificar tudo toda semana.** Só entram questões novas, alteradas ou reportadas. Questão repetida (mesmo hash de texto) herda o rótulo.
+
+```
+Importação → S3 → EventBridge → Step Functions
+  1. Lambda: limpeza + dedupe por hash
+  2. Bedrock embeddings (Cohere embed v4) → vetor guardado junto da questão
+  3. Classificador treinado (regressão logística sobre embeddings, numa Lambda)
+       treinado SÓ com rótulos limpos (professor + especialistas), nunca com os rótulos atuais
+       → probabilidade alta: segue para a decisão; custo ≈ US$ 0,0001/questão
+  4. LLM (2 votantes + juiz, árvore em cache; Bedrock Batch Inference em lotes) só no resto
+  5. Lambda de decisão (as mesmas regras deste case) → publicar / revisar / fora
+  6. revisar → fila do professor (Amazon A2I ou tela interna) → decisão vira rótulo → re-treino mensal
+Reportes de alunos → SQS → a questão volta para revisar; tema com muitos reportes → alerta
+```
+
+**Onde entra cada tipo de IA:**
+
+| Tipo | Papel |
+|---|---|
+| Embeddings | Entrada do classificador e detecção de duplicatas. |
+| Classificador treinado | O "cavalo de carga" barato, depois que existirem rótulos. Não sabe classificar em tema novo. |
+| LLM | Casos de baixa confiança, temas novos e mudanças na árvore. |
+| Agentes | Fora do caminho principal. Fazem sentido para investigar um tema com muitos reportes e propor temas novos para o grupo `fora`. |
+| Professor | Decide os casos difíceis e produz os rótulos que treinam o resto. |
+
+**Custo por questão** (preço de lista; confirmar no Bedrock):
+
+| Caminho | Custo |
+|---|---|
+| Caminho ML | ~US$ 0,0001 |
+| Caminho LLM, com cache e modelos deste case | ~US$ 0,008 |
+| Com Batch Inference | menor |
+
+Com 50 mil questões e metade indo para o LLM, são ~US$ 200 por semana no começo, caindo conforme o classificador assume.
+
+**Qualidade contínua:**
+- **Auditoria semanal:** ~100 questões publicadas, sorteadas e revisadas pelo professor. Isso dá a precisão com intervalo, num painel do CloudWatch.
+- **Alarme:** se o limite inferior cair abaixo de 95%, o corte sobe sozinho e mais questões vão para a revisão.
+- **Reportes dos alunos:** contam como sinal de erro, por tema.
+- **Mudança de padrão:** se a distribuição de temas da semana mudar muito, é provável que tenha surgido um assunto que a árvore não cobre.
+
+## d) Memo para o professor
+
+Ver `memo_professor.md`.
