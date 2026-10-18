@@ -4,9 +4,14 @@
 
 ## O que foi feito
 
-Dois programas de IA diferentes leram cada uma das 359 questões e escolheram, cada um por conta própria, o tema da árvore. Um terceiro conferiu a escolha. A questão só vai direto para o aluno quando os três concordam. Quando há divergência ou dúvida, ela vai para a sua fila, já com uma sugestão de tema e o motivo da dúvida.
+Três programas de IA diferentes leram cada questão e escolheram, cada um por conta própria, o tema da árvore. Um quarto passo conferiu a escolha. A questão só vai direto para o aluno quando todos concordam. Quando há divergência ou dúvida, ela vai para a sua fila, já com uma sugestão de tema e o motivo da dúvida.
 
-A meta é que pelo menos 95 de cada 100 questões publicadas estejam no tema certo. Para medir isso, uma amostra foi conferida à mão.
+A meta é que pelo menos 95 de cada 100 questões publicadas estejam no tema certo. Para medir isso, uma amostra sorteada foi conferida à mão, e as 46 publicadas que ela contém estavam todas no tema certo.
+
+**Resultado:**
+- **191 das 359 questões (53%)** podem ir direto para o aluno;
+- **166 vão para a sua revisão**, já com uma sugestão de tema;
+- **2 não cabem em nenhum tema** da árvore.
 
 ## O que encontramos na árvore de temas
 

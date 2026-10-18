@@ -107,3 +107,12 @@ Com acesso aos modelos 5.x (o Haiku 5.5 custa 10× menos que o Haiku 4.5), o cam
 ## d) Memo para o professor
 
 Ver `memo_professor.md`.
+
+## O que eu faria com mais tempo
+
+1. **Amostra maior.** Com 46 publicadas conferidas, o limite inferior é 92%. Com ~150, ele ficaria perto de 97% se o acerto se mantiver, e a previsão sairia mais estreita.
+2. **Perguntar à equipe a convenção dos temas duplicados e das "Partes".** Só essa resposta liberaria boa parte das 23 questões que hoje vão para revisão por isso.
+3. **Votante B mais forte.** Com acesso aos modelos 5.x, trocar o Haiku 4.5, que causa a maior parte das 119 divergências. É a maior alavanca de cobertura.
+4. **Testar o filtro por embeddings na prática.** Descartei por custo-benefício, sem medir. Vale comparar com a árvore inteira na mesma amostra.
+5. **Investigar as poucas `fora`.** Só 2 em 359. Testar exemplos no prompt para os modelos aceitarem melhor que "nenhum tema serve".
+6. **Conferir também as questões em revisão.** Medir com rótulo humano quantas sugestões estão certas, para saber quanto do tempo do professor vira só "confirmar".

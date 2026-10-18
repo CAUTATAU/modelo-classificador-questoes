@@ -94,3 +94,6 @@ O ancestral comum é o mesmo nó quando há unanimidade. Quando os modelos diver
 - Os anexos e o PDF do case **não** estão no repositório: são dados reais da empresa.
 - O conjunto de disciplinas "fora do recorte" e a regex de títulos genéricos foram definidos olhando os dados (`preparar.py`, `decidir.py`).
 - O Haiku inventava ids parecidos com os reais, como 5688 no lugar de 4688. Corrigido com `enum` no esquema. A 1ª versão dos votos está em `cache/v1/` (fora do git).
+- **Conferência humana da amostra-ouro.** O Opus 4.6 pré-rotulou as 72 questões às cegas. Um humano conferiu, uma a uma, **todas as 50 publicadas** da amostra (coluna `observacao = conferido` em `amostra_ouro.csv`) e concordou com o Opus em 50/50. As 22 da amostra em `revisar`/`fora` ficaram só com o rótulo do Opus, porque não entram na precisão.
+- **Regra do 3º votante, criada depois da 1ª medição.** As regras iniciais deram 46/50 = 92%. A única regra acrescentada depois de ver a amostra foi exigir que o Opus 4.6 também caia no mesmo ramo. Ela vale para todas as questões; não foi feita sob medida para os erros. Resultado: 46/46.
+- **Q0293** estoura o limite de raciocínio do Opus em todas as tentativas. Ficou em `revisar` por falta do 3º voto; não foi forçada.
