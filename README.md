@@ -36,6 +36,8 @@ As chamadas usam **boto3** (`bedrock-runtime.invoke_model`) com o corpo da Messa
 
 Todas as respostas dos modelos ficam em `cache/*.jsonl`. Rodar de novo só chama o que falta.
 
+**Reproduzir sem a AWS:** as respostas usadas na entrega estão versionadas (`cache/votos_A.jsonl`, `votos_B.jsonl`, `juiz.jsonl`, `rotulos_opus.jsonl`). Com os anexos em `dados/`, rode `python decidir.py`: ele regenera exatamente o `publicacao.csv` e a medição de precisão, sem nenhuma chamada a modelo.
+
 **Se mudar um prompt ou o esquema de resposta**, mova os `cache/votos_*.jsonl` para outra pasta. Assim todas as questões ficam classificadas com a mesma versão.
 
 ## Pipeline

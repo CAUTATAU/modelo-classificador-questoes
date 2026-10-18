@@ -1,7 +1,12 @@
 # dados reais da empresa: não publicar
 dados/
-# respostas brutas dos modelos (regeráveis)
-cache/
+# cache: só as respostas dos modelos (ids, temas, justificativas, tokens) vão para o git,
+# para reproduzir o publicacao.csv sem chamar o Bedrock. O resto tem texto de questões ou é regerável.
+cache/*
+!cache/votos_A.jsonl
+!cache/votos_B.jsonl
+!cache/juiz.jsonl
+!cache/rotulos_opus.jsonl
 .venv/
 __pycache__/
 .env

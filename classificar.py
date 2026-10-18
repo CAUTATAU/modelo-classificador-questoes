@@ -21,7 +21,8 @@ from botocore.exceptions import BotoCoreError, ClientError
 from decidir import ARQ_AMOSTRA, decidir, ler_jsonl, no_candidato, pai
 from preparar import CACHE, RAIZ, DESCRICAO_AUTOMATICA, carregar_questoes, carregar_temas, texto_arvore, texto_questao
 
-# A conta pessoal só libera até Sonnet 4.6 / Haiku 4.5 / Opus 4.6 (família 5.x: "not available for this account").
+# Na conta em que os votos rodaram, a família 5.x respondeu "not available for this account":
+# ficaram os mais novos liberados.
 SONNET = "us.anthropic.claude-sonnet-4-6"
 HAIKU = "us.anthropic.claude-haiku-4-5-20251001-v1:0"
 OPUS = "us.anthropic.claude-opus-4-6-v1"
